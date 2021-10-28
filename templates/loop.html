@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> </title>
+</head>
+<body>
+    <ol>
+        {% for i in range (1, num+1) %}
+            {#regular listing#}
+            {% if view == 'normal' %}
+                {{loop.index}}
+            {% endif %}
+            {#odd listing#}
+            {% if view == 'odd' %}
+                {% if loop.index % 2 == 1 %}
+                    {{loop.index}}
+                {% endif %}
+            {% endif %}
+            {#even listing#}
+            {% if view == 'even' %}
+                {% if loop.index % 2 == 0 %}
+                    {{loop.index}}
+                {% endif %}
+            {% endif %}
+            {% if view == 'prime' %}
+            {% set original = loop.index %}
+            {% set isprime = namespace(checkprime = true) %}
+            {% for j in range(2, original) %}
+                {% if loop.index == 1 %}
+                {% elif original % loop.index == 0 %}
+                    {% set isprime.checkprime = false %}
+                {% endif %}
+            {% endfor %}
+            {% if original == 1%}
+            {% elif isprime.checkprime %}
+                {{original}}
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+    </ol>
+</body>
+</html>
+
+    
